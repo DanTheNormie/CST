@@ -7,8 +7,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import TabsComponent from './components/HomePageComponents/ResultTabs.component.jsx';
-
+/* import TabsComponent from './components/HomePageComponents/ResultTabs.component.jsx';
+ */
 import {
   QueryClient,
   QueryClientProvider
@@ -37,10 +37,6 @@ const router = createBrowserRouter([
     path: '/',
     element: <Homepage/>,
     errorElement:<ErrorPage/>
-  },
-  {
-    path:'/a',
-    element: <TabsComponent/>
   },
   {
     path: "/status",

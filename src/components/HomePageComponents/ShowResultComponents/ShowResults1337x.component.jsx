@@ -6,6 +6,7 @@ import { IconButton } from "@mui/material";
 import {BsMagnetFill} from 'react-icons/bs'
 import { Table, TableHead, TableRow, TableCell, TableBody, Paper, TableContainer } from '@mui/material';
 import { styled, darken } from '@mui/material/styles';
+import { useEffect } from 'react';
 
 const fetch_data = async (searchText) => {
 	const baseUrl = `${LOCAL_BASE_URL}/api/getDataFrom1337x`;
@@ -33,14 +34,14 @@ const preventDrag = (e) => {
 	e.nativeEvent.stopImmediatePropagation();
 }
 
-export default function ShowResults1337x({ searchText, setLoading }) {
+export default function ShowResults1337x({ searchText, setLoading, loadingIndex, isLoadingIndicatorOn }) {
 
 	const { isLoading, isError, data, error, isSuccess,  } = useQuery(
 		['search 1337x',searchText], 
 		()=>fetch_data(searchText),
 		{
 			enabled: true,
-			refetchOnWindowFocus: true,
+			refetchOnWindowFocus: false,
 			retry: false,
 			staleTime:1000,
 			cacheTime:1000
@@ -48,15 +49,19 @@ export default function ShowResults1337x({ searchText, setLoading }) {
 	)
 	
 	if(isLoading) {
-		setLoading(true)
+		if(!isLoadingIndicatorOn)setLoading(loadingIndex, true)
 		return <div className="flex justify-center items-center">Loading...</div>
 	}
 
 	if(isError) {
-		setLoading(false)
+		if(isLoadingIndicatorOn)setLoading(loadingIndex, false)
 		return <div className="flex justify-center items-center">Something went wrong</div>
 	}
-	setLoading(false)
+	
+	if(isLoadingIndicatorOn)setLoading(loadingIndex, false)
+	if(!data) return <div>No Data</div>
+	if(!data.success) return <div>{data.message}</div>
+	
 	return <CreateMuiTable data={data} />
 }
 
@@ -98,16 +103,21 @@ const CreateMuiTable = ({ data }) => {
 	}
 
 	data = data.data.map(obj => {
-		const newObj = _.cloneDeep(obj);
+		console.log(obj);
+		/* if(obj.status === 'fulfilled'){ */
+			/* obj = obj.value; */
+			const newObj = _.cloneDeep(obj);
 
-		newObj['title'] = <a href={`https://1337x.unblockit.rsvp${obj['torrent_details_page_link']}`} target="_blank">{obj['title']}</a>
-		delete newObj['torrent_details_page_link'];
-		
-		newObj['magnet_link'] = <IconButton href={obj['magnet_link']}><BsMagnetFill/></IconButton>
-		
-		return newObj;
+			newObj['title'] = <a href={`https://1337x.unblockit.rsvp${obj['torrent_details_page_link']}`} target="_blank">{obj['title']}</a>
+			delete newObj['torrent_details_page_link'];
+			
+			newObj['magnet_link'] = <IconButton href={obj['magnet_link']}><BsMagnetFill/></IconButton>
+			
+			return newObj;
+		/* } */
+		/* return null */
 	});
-
+	console.log('logging, ',data[0])
 	const headers = Object.keys(data[0]);
 
 	return (	
@@ -122,13 +132,15 @@ const CreateMuiTable = ({ data }) => {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{data.map((item) => (
-						<StyledTableRow key={item.id}>
-							{headers.map((header) => (
-								<StyledTableCell key={header}>{item[header]}</StyledTableCell>
-							))}
-						</StyledTableRow>
-					))}
+					{data.map((item, i) => {if(item !== null){
+						return (
+							<StyledTableRow >
+								{headers.map((header) => (
+									<StyledTableCell key={header}>{item[header]}</StyledTableCell>
+								))}
+							</StyledTableRow>
+						)
+					}})}
 				</TableBody>
 				</Table>
 			</TableContainer>

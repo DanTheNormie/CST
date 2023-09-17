@@ -27,14 +27,15 @@ const fetch_data = async (searchText) => {
 	}
 }
 
-export default function ShowResultsPiratebay({ searchText, setLoading }) {
+export default function ShowResultsPiratebay({ searchText, setLoading, loadingIndex, isLoadingIndicatorOn }) {
 	
 	const { isLoading, isError, data, error, isSuccess,  } = useQuery(
 		['search pirate bay',searchText], 
 		()=>fetch_data(searchText),
 		{
 			enabled: true,
-			refetchOnWindowFocus: true,
+			force:true,
+			refetchOnWindowFocus: false,
 			retry: false,
 			staleTime:1000,
 			cacheTime:1000
@@ -42,17 +43,18 @@ export default function ShowResultsPiratebay({ searchText, setLoading }) {
 	)
 
 	if(isLoading) {
-		setLoading(true)
+		if(!isLoadingIndicatorOn)setLoading(loadingIndex, true)
 		return <div className="flex justify-center items-center">Loading...</div>
 	}
 
 	if(isError) {
-		setLoading(false)
+		if(isLoadingIndicatorOn)setLoading(loadingIndex, false)
 		return <div className="flex justify-center items-center">Something went wrong</div>
 	}
 	
-	setLoading(false)
-	
+	if(isLoadingIndicatorOn)setLoading(loadingIndex, false)
+	if(!data) return <div>No Data</div>
+	if(!data.success) return <div>{data.message}</div>
 	
 	/* return <div>{Object.keys(data).map((e)=><div>{e}</div>)}</div> */
 	return <CreateMuiTable data={data} />
@@ -105,7 +107,7 @@ const CreateMuiTable = ({ data }) => {
 	data = data.data.map(obj => {
 		const newObj = _.cloneDeep(obj);
 
-		newObj['title'] = <a href={`https://pirate-proxy.mov${obj['torrent_details_page_link']}`} target="_blank">{obj['title']}</a>
+		newObj['title'] = <a href={`https://tpb26.ukpass.co${obj['torrent_details_page_link']}`} target="_blank">{obj['title']}</a>
 		delete newObj['torrent_details_page_link'];
 		
 		newObj['magnet_link'] = <IconButton href={obj['magnet_link']}><BsMagnetFill/></IconButton>
@@ -116,21 +118,21 @@ const CreateMuiTable = ({ data }) => {
 	const headers = Object.keys(data[0]);
 
 	return (	
-		<Paper sx={{ width: '100%', overflow: 'hidden' , display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column'}}>
+		<Paper sx={{ width: '100%' , display:'flex', justifyContent:'center', alignItems:'center', flexDirection:'column'}}>
 			<TableContainer>
 				<Table stickyHeader aria-label="sticky table">
 				<TableHead>
 					<TableRow>
-						{headers.map((header) => { 
-							if (header) return <StyledTableHeadCell className='' key={header}>{header.toLocaleUpperCase()}</StyledTableHeadCell> }
+						{headers.map((header,index) => { 
+							if (header) return <StyledTableHeadCell className='' key={index}>{header.toLocaleUpperCase()}</StyledTableHeadCell> }
 						)}
 					</TableRow>
 				</TableHead>
 				<TableBody>
 					{data.map((item) => (
-						<StyledTableRow key={item.id}>
-							{headers.map((header) => (
-								<StyledTableCell key={header+item[header]}>{item[header]}</StyledTableCell>
+						<StyledTableRow>
+							{headers.map((header, i) => (
+								<StyledTableCell key={i}>{item[header]}</StyledTableCell>
 							))}
 						</StyledTableRow>
 					))}
