@@ -1,8 +1,21 @@
-# React + Vite
+<h1 align="center">Hi 👋, I'm Daniel.</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- <h4>🍀 This is a cluster search tool for downloading/streaming Torrents, Movies, Games etc...</h4>
+- <h4>🐳 This REACT app uses Scrapy (a JSON based web-scrapper) as it's backend for scrapping mulitple site simultaneously</h4>
+- <h4>🐉 Languages & Frameworks used :</h4>
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="40" height="40" />
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" width="40" height="40" />
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="40" height="40" />
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg" width="40" height="40" />
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="40" height="40"/>
+    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="40" height="40" />
 
-Currently, two official plugins are available:
+<h2>How it looks</h2>
+<h4>Normal Search</h4>
+![Normal Search Gif](https://github.com/DanTheNormie/CST/assets/76253071/9591f66e-2015-4ee5-9eae-a745f4dd2ad0)
+<h4>Custom Search</h4>
+![Custom Search Gif](https://github.com/DanTheNormie/CST/assets/76253071/21bbed1a-ff61-4432-9bf2-11b5084cdd24)
+<h4>Testing Custom Scrape Tasks</h4>
+![Testing Custom Scrape Tasks](https://github.com/DanTheNormie/CST/assets/76253071/1dc5a231-fdb6-4733-89d3-960ee990e268)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
