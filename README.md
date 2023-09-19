@@ -12,10 +12,10 @@
 
 <h2>How it looks</h2>
 <h4>Normal Search</h4>
-![Normal Search Gif](https://github.com/DanTheNormie/CST/assets/76253071/9591f66e-2015-4ee5-9eae-a745f4dd2ad0)
+<img src="Normal_search.gif">
 <h4>Custom Search</h4>
-![Custom Search Gif](https://github.com/DanTheNormie/CST/assets/76253071/21bbed1a-ff61-4432-9bf2-11b5084cdd24)
-<h4>Testing Custom Scrape Tasks</h4>
-![Testing Custom Scrape Tasks](https://github.com/DanTheNormie/CST/assets/76253071/1dc5a231-fdb6-4733-89d3-960ee990e268)
+<img src="Custom_Search.gif">
+<h4>Testing Custom Scrape Tasks ("/status" route)</h4>
+<img src="testing_scrape_tasks.gif">
 
 
