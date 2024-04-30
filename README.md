@@ -1,7 +1,7 @@
 <h1 align="center">Hi 👋, I'm Daniel.</h1>
 
 - <h4>🍀 This is a cluster search tool for downloading/streaming Torrents, Movies, Games etc...</h4>
-- <h4>🐳 This REACT app uses Scrapy (a JSON based web-scrapper) as it's backend for scrapping mulitple site simultaneously</h4>
+- <h4>🐳 This REACT app uses <a href="https://github.com/DanTheNormie/Scrapy">Scrapy</a> ( my JSON driven web-scrapper api ) as it's backend for scrapping mulitple site simultaneously</h4>
 - <h4>🐉 Languages & Frameworks used :</h4>
     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="40" height="40" />
     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" width="40" height="40" />
